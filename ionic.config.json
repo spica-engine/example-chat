@@ -1,0 +1,7 @@
+{
+  "name": "assets/asset-chat",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
