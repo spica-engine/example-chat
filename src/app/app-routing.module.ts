@@ -14,10 +14,6 @@ const routes: Routes = [
   {
     path: 'users',
     loadChildren: () => import('./pages/users/users.module').then( m => m.UsersPageModule)
-  },
-  {
-    path: 'firehose',
-    loadChildren: () => import('./pages/firehose/firehose.module').then( m => m.FirehosePageModule)
   }
 ];
 

@@ -22,14 +22,18 @@ export interface User{
   id?: string;
   username?: string;
   email?: string;
+  image?: string;
 }
 
 export interface ChatGroup{
   _id?: string;
   name?: string;
   created_at?: string;
-  users?: string[] | User[];
+  users?: User[];
   last_active?: [{user: User, date:string}];
+  last_message?: string,
+  last_message_time?: string;
+  new_message_count?: number;
 }
 
 export interface Chat{
