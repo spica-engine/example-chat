@@ -8,6 +8,14 @@ export class AuthService {
 
   user: User;
   userId: string;
+  images: string[] = [
+    "https://storage.googleapis.com/download/storage/v1/b/hq-example-chat-d5746/o/606d8d7f321600002c9948cd?alt=media&timestamp=1617792384555",
+    "https://storage.googleapis.com/download/storage/v1/b/hq-example-chat-d5746/o/606d8d7f321600002c9948cc?alt=media&timestamp=1617792384555",
+    "https://storage.googleapis.com/download/storage/v1/b/hq-example-chat-d5746/o/606d8d7f321600002c9948cb?alt=media&timestamp=1617792384555",
+    "https://storage.googleapis.com/download/storage/v1/b/hq-example-chat-d5746/o/606d8d7f321600002c9948ca?alt=media&timestamp=1617792384555",
+    "https://storage.googleapis.com/download/storage/v1/b/hq-example-chat-d5746/o/606d8d7f321600002c9948c9?alt=media&timestamp=1617792384555",
+    "https://storage.googleapis.com/download/storage/v1/b/hq-example-chat-d5746/o/606d8d7f321600002c9948c8?alt=media&timestamp=1617792384555"
+  ]
   constructor(private dataService: DataService) { 
   }
 
@@ -21,7 +29,7 @@ export class AuthService {
         id: userID,
         username: "user_" + this.makeid(5),
         email: "user_" + this.makeid(5) + "@test.com",
-        image: ""
+        image: this.images[Math.floor(Math.random() * this.images.length)]
       }).toPromise();
     return this.user;
   }
