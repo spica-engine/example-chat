@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title [routerLink]="['chat-detail']" *ngIf="chatGroup">{{chatGroup.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content>
+  <message-single *ngFor="let message of messages | async" [avatar]="usersInChatGroup[message.owner].image" [message]="message.message"
+    [isCurrentUser]="message.owner == user._id"></message-single>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-item lines="none">
+      <ion-input [(ngModel)]="message" (keyup.enter)="sendMessage()" placeholder="Send a message..." enterkeyhint="send" clearInput="true" autofocus="true"></ion-input>
+      <ion-icon name="send" slot="end" (click)="sendMessage()"></ion-icon>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

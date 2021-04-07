@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "assets/asset-chat",
+  "appName": "chat",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Chats</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="createNewGroup()">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item class="chat-group" *ngFor="let chat of chats | async" [routerLink]="['./' + chat._id]">
+      <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+      <ion-label>
+        <h3>{{chat.name}}</h3>
+        <p *ngIf="chat.last_message">{{chat.last_message}}</p>
+        <p class="empty-chat" *ngIf="!chat.last_message">No message in this chat</p>
+      </ion-label>
+      <ion-badge *ngIf="chat.new_message_count" slot="end" color="success">{{chat.new_message_count}}</ion-badge>
+    </ion-item>
+  </ion-list>
+</ion-content>

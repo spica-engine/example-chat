@@ -1,5 +1,5 @@
 {
-  "name": "assets/asset-chat",
+  "name": "chat",
   "integrations": {
     "capacitor": {}
   },

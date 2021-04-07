@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="chatGroup as chat">{{chat.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="chatGroup as chat">
+    <ion-list>
+      <ng-container *ngFor="let user of chat.users">
+        <ion-item *ngIf="user._id != me._id">
+          <ion-avatar slot="start">
+            <img [src]="user.image">
+          </ion-avatar>
+          <ion-label>
+            {{user.username}}
+          </ion-label>
+        </ion-item>
+      </ng-container>
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border" *ngIf="chatGroup as chat">
+  <ion-toolbar>
+    <ion-button class="button-delete" expand="full" (click)="deleteGroup(chat)">Leave From Group</ion-button>
+  </ion-toolbar>
+</ion-footer>
