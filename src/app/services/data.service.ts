@@ -30,7 +30,7 @@ export interface ChatGroup{
   name?: string;
   created_at?: string;
   users?: User[];
-  last_active?: [{user: User, date:string}];
+  last_active?: {user: User, date:string, unread_messages_count: number}[];
   last_message?: string,
   last_message_time?: string;
   new_message_count?: number;

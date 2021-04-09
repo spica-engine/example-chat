@@ -43,21 +43,14 @@ export class ChatsPage implements OnInit {
         }
       })
       .pipe(
-        switchMap((chats: []) =>
-          forkJoin(
-            chats.map((chat: ChatGroup) => {
-              let lastActiveDate = chat.last_active.filter(lastActive => lastActive.user == this.user._id)[0];
-              if (!lastActiveDate)
-                return
-              return this.getNewMessagesCount(chat._id, lastActiveDate.date).pipe(
-                map((message) => {
-                  chat['new_message_count'] = message.length;
-                  return chat;
-                })
-              )
-            })
-          )
-        ),
+        map((chats) => {
+          chats = chats.map((chat: ChatGroup) => {
+            let userObject = chat.last_active.filter(user => user.user == this.user._id)[0];
+            chat.new_message_count = userObject.unread_messages_count;
+            return chat;
+          })
+          return chats;
+        }),
         tap(console.log),
         map(chats => chats.sort((a, b) => {
           if (b["last_message_time"] && a["last_message_time"])
@@ -65,12 +58,6 @@ export class ChatsPage implements OnInit {
           return -1;
         }))
       );
-  }
-  
-  getNewMessagesCount(chatId, lastOpen) {
-    return this.dataService.resources.chat.getAll({
-      queryParams: { filter: { chat: chatId, created_at: { "$gt": `Date(${lastOpen})` }, owner: { "$ne": this.user._id } } },
-    });
   }
 
   async createNewGroup() {

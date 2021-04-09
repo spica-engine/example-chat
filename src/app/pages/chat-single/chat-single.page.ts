@@ -36,6 +36,7 @@ export class ChatSinglePage implements OnInit {
     this.chatGroup.last_active.map(lastActive => {
       if(lastActive.user == this.user._id) 
         lastActive.date = new Date().toISOString();
+        lastActive.unread_messages_count = 0;
       return lastActive   
     })
     this.dataService.resources.chatGroup.update(this.chatId, this.chatGroup).toPromise().then(res => {
@@ -55,9 +56,16 @@ export class ChatSinglePage implements OnInit {
       created_at: new Date()
     });
 
+    this.chatGroup.last_active = this.chatGroup.last_active.map((user) => {
+      if(user.user != this.user._id)
+        user.unread_messages_count = user.unread_messages_count + 1;
+      return user;
+    });
+
     this.dataService.resources.chatGroup.patch(this.chatGroup._id,{
       last_message: this.message,
-      last_message_time: new Date()
+      last_message_time: new Date(),
+      last_active: this.chatGroup.last_active
     })
     this.message = "";
   }
